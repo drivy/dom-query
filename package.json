@@ -1,0 +1,39 @@
+{
+  "name": "dom-query",
+  "version": "1.0.0",
+  "description": "utilities to select dom elements and handle events",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest src --runInBand",
+    "lint:js": "eslint src --ext ts,js --max-warnings 0 "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drivy/dom-query.git"
+  },
+  "keywords": [
+    "javascript",
+    "utility",
+    "dom",
+    "query",
+    "event"
+  ],
+  "author": "drivy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/drivy/dom-query/issues"
+  },
+  "homepage": "https://github.com/drivy/dom-query#readme",
+  "devDependencies": {
+    "@drivy/eslint-config": "^1.0.1",
+    "@types/jest": "^24.0.13",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1",
+    "typescript": "^3.4.5"
+  }
+}
