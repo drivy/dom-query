@@ -892,7 +892,7 @@
   dependencies:
     "@typescript-eslint/typescript-estree" "1.9.0"
 
-"@typescript-eslint/parser@1.9.0":
+"@typescript-eslint/parser@1.9.0", "@typescript-eslint/parser@^1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-1.9.0.tgz#5796cbfcb9a3a5757aeb671c1ac88d7a94a95962"
   integrity sha512-CWgC1XrQ34H/+LwAU7vY5xteZDkNqeAkeidEpJnJgkKu0yqQ3ZhQ7S+dI6MX4vmmM1TKRbOrKuXc6W0fIHhdbA==

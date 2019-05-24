@@ -62,6 +62,7 @@ describe("query utilities", () => {
       const enhancedNode = toEnhancedHTMLElement<HTMLInputElement>(
         nativeQueryResult!
       );
+
       expect(enhancedNode).not.toBeNull();
       expect(enhancedNode!.id).toEqual(`${idToSelect}`);
       expect(enhancedNode!.value).not.toBeUndefined();

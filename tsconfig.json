@@ -16,12 +16,12 @@
     "noImplicitReturns": true,
     "baseUrl": "./",
     "paths": {
-      "*": ["app/assets/javascripts/*"]
+      "*": ["src/*"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "jsx": "react"
   },
-  "include": ["app/assets/javascripts/**/*", "spec/**/*"]
+  "include": ["src/**/*"]
 }
