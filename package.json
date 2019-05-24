@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/drivy/dom-query#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
     "@drivy/eslint-config": "^1.0.1",
     "@types/jest": "^24.0.13",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
