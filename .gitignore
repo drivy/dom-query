@@ -1,1 +1,5 @@
 node_modules
+
+# rollup
+.rpt2_cache
+dist

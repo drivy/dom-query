@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "utilities to select dom elements and handle events",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist/index.js",
-    "dist/index.d.ts"
+    "dist/index.js.map",
+    "dist/types/index.d.ts"
   ],
   "scripts": {
     "test": "jest src --runInBand",
-    "lint:js": "eslint src --ext ts,js --max-warnings 0 "
+    "lint:js": "eslint src --ext ts,js --max-warnings 0 ",
+    "build": "yarn clean-dist && yarn rollup -c",
+    "clean-dist": "node_modules/.bin/rimraf ./dist"
   },
   "repository": {
     "type": "git",
@@ -42,6 +45,8 @@
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.8.0",
     "prettier": "^1.17.1",
+    "rollup": "^1.12.3",
+    "rollup-plugin-typescript2": "^0.21.1",
     "typescript": "^3.4.5"
   }
 }

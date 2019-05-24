@@ -6,7 +6,6 @@
     "declarationDir": "dist/types",
     "sourceMap": true,
     "moduleResolution": "node",
-    "allowJs": true,
     "noEmit": true,
     "noImplicitThis": true,
     "strict": true,
