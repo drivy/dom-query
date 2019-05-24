@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "utilities to select dom elements and handle events",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "jest src --runInBand",
     "lint:js": "eslint src --ext ts,js --max-warnings 0 "

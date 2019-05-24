@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationDir": "dist/types",
     "sourceMap": true,
+    "moduleResolution": "node",
     "allowJs": true,
     "noEmit": true,
     "noImplicitThis": true,
@@ -20,8 +23,8 @@
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "jsx": "react"
+    "lib": ["esnext", "dom"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
