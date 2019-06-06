@@ -23,7 +23,7 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
   on(type, callback, options) {
     const attachedCallback = (e: Event) => {
       // wrapped in a function to mimic the once configuration of the native option, which is not well supported (IE 11)
-      callback.call(e.target, e);
+      callback.call(e.target, e as WindowEventMap[typeof type]);
       if (options && options.once) {
         this.removeEventListener(type, attachedCallback);
       }
@@ -39,7 +39,7 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
   onDelegate(childSelector, type, callback, options) {
     const containerListenerCallback = (e: Event) => {
       if (e && e.target && (e.target as HTMLElement).matches(childSelector)) {
-        callback.call(e.target, e);
+        callback.call(e.target, e as WindowEventMap[typeof type]);
         if (options && options.once) {
           // to mimic the once configuration of the native option, which is not well supported (IE 11)
           this.removeEventListener(type, containerListenerCallback);

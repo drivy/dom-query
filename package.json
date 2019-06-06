@@ -1,19 +1,29 @@
 {
-  "name": "dom-query",
+  "name": "@drivy/dom-query",
   "version": "1.0.0",
   "description": "utilities to select dom elements and handle events",
+  "source": "src/index.ts",
   "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/index.js",
     "dist/index.js.map",
-    "dist/types/index.d.ts"
+    "dist/index.d.ts",
+    "dist/index.mjs",
+    "dist/index.mjs.map",
+    "dist/index.umd.js",
+    "dist/index.umd.js.map"
   ],
   "scripts": {
     "test": "jest src --runInBand",
     "lint:js": "eslint src --ext ts,js --max-warnings 0 ",
-    "build": "yarn clean-dist && yarn rollup -c",
-    "clean-dist": "node_modules/.bin/rimraf ./dist"
+    "build": "yarn clean-dist && yarn microbundle",
+    "build:dev": "yarn build && yarn yalc:publish",
+    "clean-dist": "node_modules/.bin/rimraf ./dist",
+    "check-packaging": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+    "yalc:publish": "yalc publish"
   },
   "repository": {
     "type": "git",
@@ -44,9 +54,8 @@
     "eslint-plugin-jest": "^22.6.4",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.8.0",
+    "microbundle": "^0.11.0",
     "prettier": "^1.17.1",
-    "rollup": "^1.12.3",
-    "rollup-plugin-typescript2": "^0.21.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.5.1"
   }
 }
