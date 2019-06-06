@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationDir": "dist/types",
     "sourceMap": true,
-    "allowJs": true,
+    "moduleResolution": "node",
     "noEmit": true,
     "noImplicitThis": true,
     "strict": true,
@@ -16,12 +18,12 @@
     "noImplicitReturns": true,
     "baseUrl": "./",
     "paths": {
-      "*": ["app/assets/javascripts/*"]
+      "*": ["src/*"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "jsx": "react"
+    "lib": ["esnext", "dom"]
   },
-  "include": ["app/assets/javascripts/**/*", "spec/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
