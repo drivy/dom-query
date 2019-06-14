@@ -3,7 +3,6 @@
     "target": "es5",
     "module": "ESNext",
     "declaration": true,
-    "declarationDir": "dist/types",
     "sourceMap": true,
     "moduleResolution": "node",
     "noEmit": true,
