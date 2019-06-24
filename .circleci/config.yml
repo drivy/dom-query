@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+
+    working_directory: ~/dom-query
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Javascript dependencies
+          command: yarn install --pure-lockfile
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - node_modules
+
+      - run:
+          name: Typecheck sources (TypeScript)
+          command: yarn tsc
+
+      - run:
+          name: Lint js
+          command: yarn lint:js
+
+      - run:
+          name: "Tests"
+          command: yarn test
