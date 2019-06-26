@@ -1,7 +1,7 @@
 {
   "name": "@drivy/dom-query",
   "version": "1.0.0",
-  "description": "utilities to select dom elements and handle events",
+  "description": "Utilities to select dom elements and handle events",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
@@ -34,7 +34,8 @@
     "utility",
     "dom",
     "query",
-    "event"
+    "event",
+    "typescript"
   ],
   "author": "drivy",
   "license": "MIT",

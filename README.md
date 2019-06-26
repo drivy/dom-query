@@ -1,35 +1,62 @@
 # Enhanced HTML elements with query/event methods
 
-Functions dedicated to easily select elements from the DOM (css query selectors) and handle events (attach/detach)
+Utility functions to easily perform DOM element manipulation:
 
-- explicite imports
-- native-like chaining
-- leverage TypeScript
-- non-verbose API
-- can be introduced in existing code base (conversion methods)
+- Element selection based on css query selectors. Chainable. NodeLists automatically converted as Arrays
+- Helpers to Attach/detach events. Event delegation supported
 
-## Enhanced HTML Element API
+This library is provided as an ES module with Typescript declarations.
+
+## Install
+
+Install with npm:
+
+```ts
+$ npm install @drivy/dom-query
+```
+
+Install with yarn:
+
+```ts
+$ yarn add @drivy/dom-query
+```
+
+## Usage
+
+```ts
+import { query, queryAll } from "@drivy/dom-query";
+
+queryAll(".home-header").map(header => console.log(header));
+// => <h1 class="home-header"> Welcome </h1>
+// => <h1 class="home-header"> Get started </h1>
+
+query(".confirm-button").on("click", e => {
+  confirm(e.target);
+});
+```
+
+## API
 
 ### Get elements from the DOM
 
 `query`
 
-- to select a element from the DOM with a css query selector.
-- return `null` if no element matches the selector.
-- Chainable. Chained method will be based on the element context
+- selects an element from the DOM with a css query selector.
+- returns `null` if no element matches the selector.
+- chainable. Chained method will be based on the last selected element context
 
 `queryStrict`
 
-- like `query` but will raise en exception if no element matches the selector.
+- like `query` method but will raise en exception if no element matches the selector.
 
 `queryAll`
 
-- to select a list of elements from the DOM with a css query selector. Unlike the native Element.querySelectorAll method, the result will be an array and so you can directly access Array methods (forEach, map, reduce, filter...)
+- selects a list of elements from the DOM with a css query selector. NodeList results will be converted to Arrays so you can directly access Array methods (forEach, map, reduce, filter...)
 
 Examples:
 
 ```ts
-import { query, queryStrict, queryAll } from "utils/query"
+import { query, queryStrict, queryAll } from "@drivy/dom-query"
 ...
 const myElement = query(".js_my-element")
 const mySubElement = myElement.query(".js_my-sub-element")
@@ -52,10 +79,10 @@ You can transform an existing javascript Element/List of Elements to an Enhanced
 - `toEnhancedHTMLElement`
 - `toEnhancedHTMLElementList`
 
-You have to use those methods when input elements are out of you scope (function args, event.target ...)
+You have to use those methods when input elements are out of your scope (function args, event.target ...)
 
 ```ts
-import { toEnhancedHTMLElement, toEnhancedHTMLElementList } from "utils/query"
+import { toEnhancedHTMLElement, toEnhancedHTMLElementList } from "@drivy/dom-query"
 ...
 
 const myElement = toEnhancedHTMLElement(myHTMLElement);
@@ -64,28 +91,28 @@ const myElements = toEnhancedHTMLElementList(myHTMLElements);
 
 ### Handle events
 
-Based on a EnhancedHTMLElement/EnhancedHTMLElementList retrieved with the previous query/transform methods, you can attach/detach events with the following methods:
+You can attach/detach events with the following methods:
 
 EnhancedHTMLElement`.on`
 
-- To attach event like native `target.addEventListener`.
-- Returns a "detach" function. When called, will remove the event listener like `target.removeEventListener`.
+- attaches event like native `target.addEventListener`.
+- returns a "detach" function. When called, will remove the event listener like `target.removeEventListener`.
 
 EnhancedHTMLElementList`.on`
 
-- Same parameters and behavior than EnhancedHTMLElement`.on` but the event will be attached on each element contained in the list.
-- Returns a "detach" function that when called will detach the events attached on each element of the list
+- same parameters and behavior than EnhancedHTMLElement`.on` but the event will be attached on each element contained in the list.
+- returns a "detach" function that when called will detach the events attached on each element of the list
 
 EnhancedHTMLElement`.onDelegate`
 
-- To do event delegation. [pattern description here](https://davidwalsh.name/event-delegate).
-- Like `.on` method but takes an extra parameter (first one) as a css query selector to specify the children to used as event targets
-- Returns a "detach" function. When called, will remove the event listener attached to the container.
+- does event delegation. [pattern description here](https://davidwalsh.name/event-delegate).
+- like `.on` method but takes an extra parameter (first one) as a css query selector to specify the children to used as event targets
+- returns a "detach" function. When called, will remove the event listener attached to the container.
 
 EnhancedHTMLElementList`.onDelegate`
 
-- Same parameters and behavior than EnhancedHTMLElement`.onDelegate` but the event delegation will be done for each element of the list.
-- Returns a "detach" function that when called will detach the events attached on each element of the list
+- same parameters and behavior than EnhancedHTMLElement`.onDelegate` but the event delegation will be done for each element of the list.
+- returns a "detach" function that when called will detach the events attached on each element of the list
 
 Examples:
 
@@ -151,7 +178,7 @@ myElement2.on(
 Because `EnhancedHTMLElement` enhances `HTMLElement` by default, to access properties/methods from an enhanced HTMLInputElement with Typescript (ex: `myEnhancedInput.value`), you must declare the target Type when calling the query/converting method
 
 ```ts
-import { query, queryAll, toEnhancedHTMLElement } from "utils/query"
+import { query, queryAll, toEnhancedHTMLElement } from "@drivy/dom-query"
 ...
 
 const myEnhancedInput = query<HTMLInputElement>(".js_my-target-input");
