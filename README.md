@@ -106,7 +106,7 @@ EnhancedHTMLElementList`.on`
 EnhancedHTMLElement`.onDelegate`
 
 - does event delegation. [pattern description here](https://davidwalsh.name/event-delegate).
-- like `.on` method but takes an extra parameter (first one) as a css query selector to specify the children to used as event targets
+- like `.on` method but takes an extra parameter (first one) as a css query selector to specify the children to use as event targets
 - returns a "detach" function. When called, will remove the event listener attached to the container.
 
 EnhancedHTMLElementList`.onDelegate`
