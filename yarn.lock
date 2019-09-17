@@ -705,9 +705,9 @@
     minimist "^1.2.0"
 
 "@drivy/eslint-config@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@drivy/eslint-config/-/eslint-config-1.0.1.tgz#072a3f1c3372ffd0f22531e4f22f3ef95f604b7d"
-  integrity sha512-qp8HOL7k2Dft05ZT03lCMZvDdwhh4ALr+UWYlFfyCgWWFj6pSy1uexPX3ipg7/FF6ml/VxFBLlq76Qf3WXD9wQ==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@drivy/eslint-config/-/eslint-config-1.0.4.tgz#a3b95ab04a3d7c819c83c88dced2a780370941e2"
+  integrity sha512-oPt9ueum1511oZL88OX/a/uuKlis6EOGP80he2UThb0ewcQDtiRcblCHFCJY2l3uUbf3yWrswijBfbzF47kBNQ==
 
 "@jest/console@^24.7.1":
   version "24.7.1"
