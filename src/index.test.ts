@@ -134,42 +134,46 @@ describe("query utilities", () => {
     });
 
     describe("should have the right even type", () => {
-      it("for keyboard event", done => {
-        const queryResult = query("#input");
+      it("for keyboard event", () => {
+        return new Promise(done => {
+          const queryResult = query("#input");
 
-        expect(queryResult).not.toBeNull();
+          expect(queryResult).not.toBeNull();
 
-        if (!queryResult) {
-          done();
-          return;
-        }
+          if (!queryResult) {
+            done();
+            return;
+          }
 
-        queryResult.on("keypress", e => {
-          // make sure this does not raise any TS error
-          expect(e.key).not.toBeNull();
-          expect(e.key).toEqual("a");
-          done();
+          queryResult.on("keypress", e => {
+            // make sure this does not raise any TS error
+            expect(e.key).not.toBeNull();
+            expect(e.key).toEqual("a");
+            done();
+          });
+          const event = new KeyboardEvent("keypress", { key: "a" });
+          queryResult.dispatchEvent(event);
         });
-        const event = new KeyboardEvent("keypress", { key: "a" });
-        queryResult.dispatchEvent(event);
       });
 
-      it("for mouse event", done => {
-        const queryResult = query("#input");
+      it("for mouse event", () => {
+        return new Promise(done => {
+          const queryResult = query("#input");
 
-        expect(queryResult).not.toBeNull();
+          expect(queryResult).not.toBeNull();
 
-        if (!queryResult) {
-          done();
-          return;
-        }
+          if (!queryResult) {
+            done();
+            return;
+          }
 
-        queryResult.on("click", e => {
-          // make sure this does not raise any TS error
-          expect(e.clientX).not.toBeNull();
-          done();
+          queryResult.on("click", e => {
+            // make sure this does not raise any TS error
+            expect(e.clientX).not.toBeNull();
+            done();
+          });
+          queryResult.click();
         });
-        queryResult.click();
       });
     });
 
@@ -232,47 +236,51 @@ describe("query utilities", () => {
     });
 
     describe("should have the right even type", () => {
-      it("for keyboard event", done => {
-        const container = query("#el1");
+      it("for keyboard event", () => {
+        return new Promise(done => {
+          const container = query("#el1");
 
-        expect(container).not.toBeNull();
+          expect(container).not.toBeNull();
 
-        if (!container) {
-          done();
-          return;
-        }
+          if (!container) {
+            done();
+            return;
+          }
 
-        container.onDelegate("input", "keypress", e => {
-          // make sure this does not raise any TS error
-          expect(e.key).not.toBeNull();
-          expect(e.key).toEqual("a");
-          done();
+          container.onDelegate("input", "keypress", e => {
+            // make sure this does not raise any TS error
+            expect(e.key).not.toBeNull();
+            expect(e.key).toEqual("a");
+            done();
+          });
+
+          const event = new KeyboardEvent("keypress", {
+            key: "a",
+            bubbles: true
+          });
+          container.queryStrict("#input").dispatchEvent(event);
         });
-
-        const event = new KeyboardEvent("keypress", {
-          key: "a",
-          bubbles: true
-        });
-        container.queryStrict("#input").dispatchEvent(event);
       });
 
-      it("for mouse event", done => {
-        const container = query("#el1");
+      it("for mouse event", () => {
+        return new Promise(done => {
+          const container = query("#el1");
 
-        expect(container).not.toBeNull();
+          expect(container).not.toBeNull();
 
-        if (!container) {
-          done();
-          return;
-        }
+          if (!container) {
+            done();
+            return;
+          }
 
-        container.onDelegate("input", "click", e => {
-          // make sure this does not raise any TS error
-          expect(e.clientX).not.toBeNull();
-          done();
+          container.onDelegate("input", "click", e => {
+            // make sure this does not raise any TS error
+            expect(e.clientX).not.toBeNull();
+            done();
+          });
+
+          container.queryStrict("#input").click();
         });
-
-        container.queryStrict("#input").click();
       });
     });
 
