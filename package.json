@@ -58,5 +58,8 @@
     "microbundle": "^0.11.0",
     "prettier": "^1.17.1",
     "typescript": "^3.5.1"
+  },
+  "resolutions": {
+    "js-yaml": "^3.13.1"
   }
 }
