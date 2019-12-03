@@ -127,7 +127,7 @@ export function query<T extends HTMLElement = HTMLElement>(
 }
 
 export function queryStrict<T extends HTMLElement = HTMLElement>(
-  this: HTMLElement & EnhancedHTMLElement | void,
+  this: (HTMLElement & EnhancedHTMLElement) | void,
   selector: string
 ): T & EnhancedHTMLElement {
   const element =
