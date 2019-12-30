@@ -60,6 +60,7 @@
     "typescript": "^3.5.1"
   },
   "resolutions": {
+    "handlebars": "^4.3.0",
     "js-yaml": "^3.13.1",
     "serialize-javascript": "^2.1.1"
   }
