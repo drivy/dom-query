@@ -57,7 +57,7 @@
     "jest": "^26.4.2",
     "microbundle": "^0.12.3",
     "prettier": "^2.1.1",
-    "typescript": "^3.5.1"
+    "typescript": "^4.0.2"
   },
   "resolutions": {
     "handlebars": "^4.3.0",
