@@ -3,7 +3,7 @@ import {
   queryStrict,
   queryAll,
   toEnhancedHTMLElement,
-  toEnhancedHTMLElementList
+  toEnhancedHTMLElementList,
 } from "./";
 
 describe("query utilities", () => {
@@ -135,7 +135,7 @@ describe("query utilities", () => {
 
     describe("should have the right even type", () => {
       it("for keyboard event", () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const queryResult = query("#input");
 
           expect(queryResult).not.toBeNull();
@@ -145,7 +145,7 @@ describe("query utilities", () => {
             return;
           }
 
-          queryResult.on("keypress", e => {
+          queryResult.on("keypress", (e) => {
             // make sure this does not raise any TS error
             expect(e.key).not.toBeNull();
             expect(e.key).toEqual("a");
@@ -157,7 +157,7 @@ describe("query utilities", () => {
       });
 
       it("for mouse event", () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const queryResult = query("#input");
 
           expect(queryResult).not.toBeNull();
@@ -167,7 +167,7 @@ describe("query utilities", () => {
             return;
           }
 
-          queryResult.on("click", e => {
+          queryResult.on("click", (e) => {
             // make sure this does not raise any TS error
             expect(e.clientX).not.toBeNull();
             done();
@@ -237,7 +237,7 @@ describe("query utilities", () => {
 
     describe("should have the right even type", () => {
       it("for keyboard event", () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const container = query("#el1");
 
           expect(container).not.toBeNull();
@@ -247,7 +247,7 @@ describe("query utilities", () => {
             return;
           }
 
-          container.onDelegate("input", "keypress", e => {
+          container.onDelegate("input", "keypress", (e) => {
             // make sure this does not raise any TS error
             expect(e.key).not.toBeNull();
             expect(e.key).toEqual("a");
@@ -256,14 +256,14 @@ describe("query utilities", () => {
 
           const event = new KeyboardEvent("keypress", {
             key: "a",
-            bubbles: true
+            bubbles: true,
           });
           container.queryStrict("#input").dispatchEvent(event);
         });
       });
 
       it("for mouse event", () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const container = query("#el1");
 
           expect(container).not.toBeNull();
@@ -273,7 +273,7 @@ describe("query utilities", () => {
             return;
           }
 
-          container.onDelegate("input", "click", e => {
+          container.onDelegate("input", "click", (e) => {
             // make sure this does not raise any TS error
             expect(e.clientX).not.toBeNull();
             done();
@@ -360,7 +360,7 @@ describe("query utilities", () => {
       const enhancedNodeList = toEnhancedHTMLElementList(nodes);
       expect(enhancedNodeList).not.toHaveLength(0);
       expect(enhancedNodeList.isEnhancedHTMLElementList).toBeTruthy();
-      enhancedNodeList.forEach(element => {
+      enhancedNodeList.forEach((element) => {
         expect(element.isEnhancedHTMLElement).toBeTruthy();
       });
     });
@@ -378,7 +378,7 @@ describe("query utilities", () => {
       expect(list).toHaveLength(
         document.querySelectorAll(`.${classToSelect}`).length
       );
-      list.forEach(element => {
+      list.forEach((element) => {
         expect(element.className).toEqual(classToSelect);
       });
     });
@@ -394,7 +394,7 @@ describe("query utilities", () => {
         expect(list).toHaveLength(
           contextNode.querySelectorAll(`.${classToSelect}`).length
         );
-        list.forEach(element => {
+        list.forEach((element) => {
           expect(element.className).toEqual(classToSelect);
         });
       }
@@ -405,7 +405,7 @@ describe("query utilities", () => {
       const list = queryAll<HTMLInputElement>(selector);
       expect(list).not.toBeNull();
       expect(list).toHaveLength(document.querySelectorAll(selector).length);
-      list.forEach(element => {
+      list.forEach((element) => {
         expect(element.tagName).toEqual(selector.toUpperCase());
         expect(element.value).not.toBeUndefined();
       });
@@ -421,7 +421,7 @@ describe("query utilities", () => {
       if (list) {
         const mockCallback = jest.fn();
         list.on("click", mockCallback);
-        list.forEach(element => {
+        list.forEach((element) => {
           element.click();
         });
 
@@ -438,7 +438,7 @@ describe("query utilities", () => {
         const mockCallback = jest.fn();
         const configuration = { once: true };
         list.on("click", mockCallback, configuration);
-        list.forEach(element => {
+        list.forEach((element) => {
           element.click();
           element.click();
         });
@@ -455,11 +455,11 @@ describe("query utilities", () => {
       if (list) {
         const mockCallback = jest.fn();
         const removeListener = list.on("click", mockCallback);
-        list.forEach(element => {
+        list.forEach((element) => {
           element.click();
         });
         removeListener();
-        list.forEach(element => {
+        list.forEach((element) => {
           element.click();
         });
 
@@ -478,10 +478,10 @@ describe("query utilities", () => {
         const mockCallback = jest.fn();
         const childrenClassToSelect = "class4";
         list.onDelegate(`.${childrenClassToSelect}`, "click", mockCallback);
-        list.forEach(container => {
+        list.forEach((container) => {
           Array.from(
             container.querySelectorAll<HTMLElement>(`.${childrenClassToSelect}`)
-          ).forEach(child => {
+          ).forEach((child) => {
             child.click();
           });
         });
@@ -507,10 +507,10 @@ describe("query utilities", () => {
           mockCallback,
           configuration
         );
-        list.forEach(container => {
+        list.forEach((container) => {
           Array.from(
             container.querySelectorAll<HTMLElement>(`.${childrenClassToSelect}`)
-          ).forEach(child => {
+          ).forEach((child) => {
             child.click();
             child.click();
           });
@@ -533,20 +533,20 @@ describe("query utilities", () => {
           "click",
           mockCallback
         );
-        list.forEach(container => {
+        list.forEach((container) => {
           Array.from(
             container.querySelectorAll<HTMLElement>(`.${childrenClassToSelect}`)
-          ).forEach(child => {
+          ).forEach((child) => {
             child.click();
           });
         });
 
         removeListeners();
 
-        list.forEach(container => {
+        list.forEach((container) => {
           Array.from(
             container.querySelectorAll<HTMLElement>(`.${childrenClassToSelect}`)
-          ).forEach(child => {
+          ).forEach((child) => {
             child.click();
           });
         });

@@ -57,7 +57,7 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
   },
   query,
   queryStrict,
-  queryAll
+  queryAll,
 };
 
 export interface EnhancedHTMLElementList {
@@ -82,10 +82,10 @@ const enhancedHTMLElementListImpl: EnhancedHTMLElementList = {
   on(type, callback, options) {
     const removers: (() => void)[] = [];
     const removeListeners = () => {
-      removers.forEach(remover => remover());
+      removers.forEach((remover) => remover());
     };
 
-    this.forEach(enhancedHTMLElement => {
+    this.forEach((enhancedHTMLElement) => {
       const remover = enhancedHTMLElement.on(type, callback, options);
       removers.push(remover);
     });
@@ -94,10 +94,10 @@ const enhancedHTMLElementListImpl: EnhancedHTMLElementList = {
   onDelegate(childSelector, type, callback, options) {
     const removers: (() => void)[] = [];
     const removeListeners = () => {
-      removers.forEach(remover => remover());
+      removers.forEach((remover) => remover());
     };
 
-    this.forEach(enhancedHTMLElement => {
+    this.forEach((enhancedHTMLElement) => {
       const remover = enhancedHTMLElement.onDelegate(
         childSelector,
         type,
@@ -108,7 +108,7 @@ const enhancedHTMLElementListImpl: EnhancedHTMLElementList = {
     });
 
     return removeListeners;
-  }
+  },
 };
 
 export const toEnhancedHTMLElement = <T extends HTMLElement = HTMLElement>(
@@ -139,7 +139,9 @@ export function queryStrict<T extends HTMLElement = HTMLElement>(
 export const toEnhancedHTMLElementList = <T extends HTMLElement = HTMLElement>(
   elements: T[]
 ): (T & EnhancedHTMLElement)[] & EnhancedHTMLElementList => {
-  const enhancedElements = elements.map(node => toEnhancedHTMLElement<T>(node));
+  const enhancedElements = elements.map((node) =>
+    toEnhancedHTMLElement<T>(node)
+  );
 
   return Object.assign(enhancedElements, enhancedHTMLElementListImpl);
 };
