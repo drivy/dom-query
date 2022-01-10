@@ -1,8 +1,8 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:10
+      - image: cimg/node:16.4.0
 
     working_directory: ~/dom-query
 
