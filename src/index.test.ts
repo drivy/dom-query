@@ -135,7 +135,7 @@ describe("query utilities", () => {
 
     describe("should have the right even type", () => {
       it("for keyboard event", () => {
-        return new Promise((done) => {
+        return new Promise<void>((done) => {
           const queryResult = query("#input");
 
           expect(queryResult).not.toBeNull();
@@ -157,7 +157,7 @@ describe("query utilities", () => {
       });
 
       it("for mouse event", () => {
-        return new Promise((done) => {
+        return new Promise<void>((done) => {
           const queryResult = query("#input");
 
           expect(queryResult).not.toBeNull();
@@ -237,7 +237,7 @@ describe("query utilities", () => {
 
     describe("should have the right even type", () => {
       it("for keyboard event", () => {
-        return new Promise((done) => {
+        return new Promise<void>((done) => {
           const container = query("#el1");
 
           expect(container).not.toBeNull();
@@ -263,7 +263,7 @@ describe("query utilities", () => {
       });
 
       it("for mouse event", () => {
-        return new Promise((done) => {
+        return new Promise<void>((done) => {
           const container = query("#el1");
 
           expect(container).not.toBeNull();
