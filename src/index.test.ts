@@ -11,7 +11,7 @@ describe("query utilities", () => {
     <div id="el1" class="class1">
         <span id="el2" class="class2"></span>
         <span id="el3" class="class2"></span>
-        <span id="el4" class="class2"></span>
+        <span id="el4" class="class2"><strong></strong></span>
         <div id="el5" class="class3">
           <div id="el6" class="class4"></div>
           <div id="el7" class="class4"></div>
@@ -212,27 +212,24 @@ describe("query utilities", () => {
 
   describe(".query .onDelegate", () => {
     it("should call the callbacks on clicks with the correct child target", () => {
-      const container = query("#el1");
+      const container = queryStrict("#el1");
 
       const child1Id = "el2";
       const child3Id = "el4";
 
-      const child1 = query(`#${child1Id}`);
-      const child3 = query(`#${child3Id}`);
+      const child1 = queryStrict(`#${child1Id}`);
+      const child3 = queryStrict(`#${child3Id}`);
+      const child3Child = child3.queryStrict("strong");
 
-      expect(container).not.toBeNull();
-      expect(child1).not.toBeNull();
-      expect(child3).not.toBeNull();
-
-      if (container && child1 && child3) {
-        const mockCallback = jest.fn();
-        container.onDelegate("span", "click", mockCallback);
-        child1.click();
-        child3.click();
-        expect(mockCallback).toHaveBeenCalledTimes(2);
-        expect(mockCallback.mock.calls[0][0].target.id).toBe(child1Id);
-        expect(mockCallback.mock.calls[1][0].target.id).toBe(child3Id);
-      }
+      const mockCallback = jest.fn();
+      container.onDelegate("span", "click", mockCallback);
+      child1.click();
+      child3.click();
+      child3Child.click();
+      expect(mockCallback).toHaveBeenCalledTimes(3);
+      expect(mockCallback.mock.calls[0][0].currentTarget.id).toBe(child1Id);
+      expect(mockCallback.mock.calls[1][0].currentTarget.id).toBe(child3Id);
+      expect(mockCallback.mock.calls[2][0].currentTarget.id).toBe(child3Id);
     });
 
     describe("should have the right even type", () => {

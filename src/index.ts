@@ -18,6 +18,14 @@ export interface EnhancedHTMLElement {
   queryAll: typeof queryAll;
 }
 
+const overrideEventCurrentTarget = (event: Event, target: Element) => {
+  Object.defineProperty(event, "currentTarget", {
+    configurable: true,
+    enumerable: true,
+    get: () => target,
+  });
+};
+
 const enhancedHTMLElementImpl: EnhancedHTMLElement = {
   isEnhancedHTMLElement: true,
   on(type, callback, options) {
@@ -38,12 +46,15 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
   },
   onDelegate(childSelector, type, callback, options) {
     const containerListenerCallback = (e: Event) => {
-      if (e && e.target && (e.target as HTMLElement).matches(childSelector)) {
-        callback.call(e.target, e as WindowEventMap[typeof type]);
-        if (options && options.once) {
-          // to mimic the once configuration of the native option, which is not well supported (IE 11)
-          this.removeEventListener(type, containerListenerCallback);
-        }
+      if (!(e.target instanceof Element)) return;
+
+      const target = e.target.closest(childSelector);
+
+      if (!this.contains(target)) return;
+
+      if (target) {
+        overrideEventCurrentTarget(e, target);
+        callback.call(target, e as WindowEventMap[typeof type]);
       }
     };
 
@@ -51,7 +62,7 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
       this.removeEventListener(type, containerListenerCallback);
     };
 
-    this.addEventListener(type, containerListenerCallback);
+    this.addEventListener(type, containerListenerCallback, options);
 
     return removeListener;
   },
