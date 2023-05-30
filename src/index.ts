@@ -1,16 +1,50 @@
+// Allow to use the Rails UJS events
+// UJS code source: https://github.com/rails/rails/blob/main/actionview/app/assets/javascripts/rails-ujs.js
+export type WindowWithRailsUJSEventMap = WindowEventMap & {
+  "rails:attachBindings": CustomEvent
+  "ujs:everythingStopped": CustomEvent
+  confirm: CustomEvent
+  "confirm:complete": CustomEvent<[boolean]>
+  "ajax:before": CustomEvent
+  "ajax:stopped": CustomEvent
+  "ajax:beforeSend": CustomEvent<
+    [
+      XMLHttpRequest,
+      {
+        url: string
+        type: string
+        data: string
+        dataType: string
+        accept: string
+      }
+    ]
+  >
+  "ajax:send": CustomEvent<[XMLHttpRequest]>
+  // response has to be casted afterwards by the event handler
+  "ajax:success": CustomEvent<
+    [(response: unknown, textStatus: string, xhr: XMLHttpRequest) => void]
+  >
+  "ajax:error": CustomEvent<
+    [(response: unknown, textStatus: string, xhr: XMLHttpRequest) => void]
+  >
+  "ajax:complete": CustomEvent<
+    [(xhr: XMLHttpRequest, textStatus: string) => void]
+  >
+}
+
 export interface EnhancedHTMLElement {
   isEnhancedHTMLElement: true
-  on: <K extends keyof WindowEventMap>(
+  on: <K extends keyof WindowWithRailsUJSEventMap>(
     this: HTMLElement & EnhancedHTMLElement,
     type: K,
-    callback: (event: WindowEventMap[K]) => void,
+    callback: (event: WindowWithRailsUJSEventMap[K]) => void,
     options?: AddEventListenerOptions
   ) => () => void
-  onDelegate: <K extends keyof WindowEventMap>(
+  onDelegate: <K extends keyof WindowWithRailsUJSEventMap>(
     this: HTMLElement & EnhancedHTMLElement,
     childSelector: string,
     type: K,
-    callback: (event: WindowEventMap[K]) => void,
+    callback: (event: WindowWithRailsUJSEventMap[K]) => void,
     options?: AddEventListenerOptions
   ) => () => void
   query: typeof query
@@ -31,7 +65,7 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
   on(type, callback, options) {
     const attachedCallback = (e: Event) => {
       // wrapped in a function to mimic the once configuration of the native option, which is not well supported (IE 11)
-      callback.call(e.target, e as WindowEventMap[typeof type])
+      callback.call(e.target, e as WindowWithRailsUJSEventMap[typeof type])
       if (options && options.once) {
         this.removeEventListener(type, attachedCallback)
       }
@@ -54,7 +88,7 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
 
       if (target) {
         overrideEventCurrentTarget(e, target)
-        callback.call(target, e as WindowEventMap[typeof type])
+        callback.call(target, e as WindowWithRailsUJSEventMap[typeof type])
       }
     }
 
@@ -73,17 +107,17 @@ const enhancedHTMLElementImpl: EnhancedHTMLElement = {
 
 export interface EnhancedHTMLElementList {
   isEnhancedHTMLElementList: true
-  on: <K extends keyof WindowEventMap>(
+  on: <K extends keyof WindowWithRailsUJSEventMap>(
     this: (HTMLElement & EnhancedHTMLElement)[] & EnhancedHTMLElementList,
     type: K,
-    callback: (event: WindowEventMap[K]) => void,
+    callback: (event: WindowWithRailsUJSEventMap[K]) => void,
     options?: AddEventListenerOptions
   ) => () => void
-  onDelegate: <K extends keyof WindowEventMap>(
+  onDelegate: <K extends keyof WindowWithRailsUJSEventMap>(
     this: (HTMLElement & EnhancedHTMLElement)[] & EnhancedHTMLElementList,
     childSelector: string,
     type: K,
-    callback: (event: WindowEventMap[K]) => void,
+    callback: (event: WindowWithRailsUJSEventMap[K]) => void,
     options?: AddEventListenerOptions
   ) => () => void
 }
