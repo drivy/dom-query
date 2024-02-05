@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:16.4.0
+      - image: cimg/node:18.15.0
 
     working_directory: ~/dom-query
 
