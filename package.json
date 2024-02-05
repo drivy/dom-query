@@ -19,8 +19,8 @@
   "scripts": {
     "test": "jest src --runInBand",
     "lint:js": "eslint src --ext ts,js --max-warnings 0 ",
-    "build": "yarn clean-dist && yarn microbundle",
-    "build:dev": "yarn build && yarn yalc:publish",
+    "build": "pnpm clean-dist && pnpm microbundle",
+    "build:dev": "pnpm build && pnpm yalc:publish",
     "clean-dist": "node_modules/.bin/rimraf ./dist",
     "check-packaging": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
     "yalc:publish": "yalc publish"

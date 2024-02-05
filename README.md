@@ -15,6 +15,12 @@ Install with npm:
 $ npm install @drivy/dom-query
 ```
 
+Install with pnpm:
+
+```ts
+$ pnpm install @drivy/dom-query
+```
+
 Install with yarn:
 
 ```ts

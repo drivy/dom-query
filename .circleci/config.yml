@@ -9,27 +9,18 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-
       - run:
           name: Install Javascript dependencies
-          command: yarn install --pure-lockfile
-
-      - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-            - node_modules
+          command: pnpm install --frozen-lockfile
 
       - run:
           name: Typecheck sources (TypeScript)
-          command: yarn tsc
+          command: pnpm tsc
 
       - run:
           name: Lint js
-          command: yarn lint:js
+          command: pnpm lint:js
 
       - run:
           name: "Tests"
-          command: yarn test
+          command: pnpm test
