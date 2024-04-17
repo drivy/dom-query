@@ -2,34 +2,25 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:16.4.0
+      - image: cimg/node:18.15.0
 
     working_directory: ~/dom-query
 
     steps:
       - checkout
 
-      - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-
       - run:
           name: Install Javascript dependencies
-          command: yarn install --pure-lockfile
-
-      - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-            - node_modules
+          command: pnpm install --frozen-lockfile
 
       - run:
           name: Typecheck sources (TypeScript)
-          command: yarn tsc
+          command: pnpm tsc
 
       - run:
           name: Lint js
-          command: yarn lint:js
+          command: pnpm lint:js
 
       - run:
           name: "Tests"
-          command: yarn test
+          command: pnpm test
