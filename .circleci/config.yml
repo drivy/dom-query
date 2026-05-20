@@ -2,12 +2,16 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:18.15.0
+      - image: cimg/node:20.15.0
 
     working_directory: ~/dom-query
 
     steps:
       - checkout
+
+      - run:
+          name: Enable corepack
+          command: sudo corepack enable
 
       - run:
           name: Install Javascript dependencies

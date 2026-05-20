@@ -39,6 +39,7 @@
   ],
   "author": "drivy",
   "license": "MIT",
+  "packageManager": "pnpm@11.1.3",
   "bugs": {
     "url": "https://github.com/drivy/dom-query/issues"
   },
